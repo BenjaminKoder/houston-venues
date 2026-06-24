@@ -132,7 +132,7 @@ export function ImportSheet({
           const n = parseFloat(val);
           v.googleRating = Number.isNaN(n) ? null : n;
         } else {
-          (v as Record<string, unknown>)[t.key] = val;
+          (v as unknown as Record<string, unknown>)[t.key] = val;
         }
       }
       out.push(v);
