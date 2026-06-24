@@ -14,7 +14,123 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      vendors: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+          price: string | null
+          type: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          notes?: string | null
+          price?: string | null
+          type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          price?: string | null
+          type?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      venues: {
+        Row: {
+          address: string | null
+          amenities: string[]
+          category: string | null
+          coords_approximate: boolean
+          created_at: string
+          google_rating: number | null
+          id: string
+          image_url: string | null
+          image_verified: boolean
+          impression: string | null
+          lat: number | null
+          lng: number | null
+          name: string
+          neighborhood: string | null
+          notes: string | null
+          price_note: string | null
+          price_online: string | null
+          price_proposed: string | null
+          sort_order: number
+          source: string | null
+          status: string | null
+          updated_at: string
+          use_case: string | null
+          venue_group: string | null
+          verified: boolean
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          amenities?: string[]
+          category?: string | null
+          coords_approximate?: boolean
+          created_at?: string
+          google_rating?: number | null
+          id: string
+          image_url?: string | null
+          image_verified?: boolean
+          impression?: string | null
+          lat?: number | null
+          lng?: number | null
+          name: string
+          neighborhood?: string | null
+          notes?: string | null
+          price_note?: string | null
+          price_online?: string | null
+          price_proposed?: string | null
+          sort_order?: number
+          source?: string | null
+          status?: string | null
+          updated_at?: string
+          use_case?: string | null
+          venue_group?: string | null
+          verified?: boolean
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          amenities?: string[]
+          category?: string | null
+          coords_approximate?: boolean
+          created_at?: string
+          google_rating?: number | null
+          id?: string
+          image_url?: string | null
+          image_verified?: boolean
+          impression?: string | null
+          lat?: number | null
+          lng?: number | null
+          name?: string
+          neighborhood?: string | null
+          notes?: string | null
+          price_note?: string | null
+          price_online?: string | null
+          price_proposed?: string | null
+          sort_order?: number
+          source?: string | null
+          status?: string | null
+          updated_at?: string
+          use_case?: string | null
+          venue_group?: string | null
+          verified?: boolean
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
