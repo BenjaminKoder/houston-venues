@@ -1,5 +1,7 @@
 // Enrich a venue with AI: looks up current web details for a Houston venue and
 // returns a structured suggestion the client can review field-by-field.
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -15,11 +17,41 @@ interface VenueInput {
   category?: string;
 }
 
+// Guard against SSRF: only allow http(s) URLs that do not resolve to
+// localhost, link-local, or private network ranges.
+function isSafeUrl(raw: string): boolean {
+  try {
+    const u = new URL(raw);
+    if (u.protocol !== "https:" && u.protocol !== "http:") return false;
+    const host = u.hostname.toLowerCase();
+    if (
+      host === "localhost" ||
+      host === "0.0.0.0" ||
+      host === "::1" ||
+      host === "[::1]" ||
+      /^127\./.test(host) ||
+      /^10\./.test(host) ||
+      /^192\.168\./.test(host) ||
+      /^169\.254\./.test(host) ||
+      /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(host) ||
+      host.endsWith(".local") ||
+      host.endsWith(".internal")
+    ) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function fetchOgImage(url: string): Promise<string | null> {
+  if (!isSafeUrl(url)) return null;
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0 (compatible; HoustonVenues/1.0)" },
       signal: AbortSignal.timeout(8000),
+      redirect: "manual",
     });
     if (!res.ok) return null;
     const html = await res.text();
@@ -52,6 +84,31 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Require a valid Supabase JWT before invoking the paid AI gateway, to
+    // prevent anonymous internet callers from draining AI credits.
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized." }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY");
+    if (supabaseUrl && supabaseAnonKey) {
+      const authClient = createClient(supabaseUrl, supabaseAnonKey, {
+        global: { headers: { Authorization: authHeader } },
+        auth: { persistSession: false, autoRefreshToken: false },
+      });
+      const { data: claims, error: claimsError } = await authClient.auth.getClaims();
+      if (claimsError || !claims) {
+        return new Response(
+          JSON.stringify({ error: "Unauthorized." }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       return new Response(
