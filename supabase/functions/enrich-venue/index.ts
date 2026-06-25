@@ -125,7 +125,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const prompt = `You are helping the Innovation Norway Houston team verify an event venue in the Houston, Texas area.
+    const prompt = `You are helping an event planning team verify an event venue in the Houston, Texas area.
 
 Venue name: ${venue.name}
 ${venue.neighborhood ? `Neighborhood hint: ${venue.neighborhood}\n` : ""}${venue.address ? `Address hint: ${venue.address}\n` : ""}${venue.category ? `Category hint: ${venue.category}\n` : ""}

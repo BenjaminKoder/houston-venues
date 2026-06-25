@@ -35,7 +35,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Houston Venues — Innovation Norway Houston" },
+      { title: "Houston Venues" },
       {
         name: "description",
         content:
@@ -200,7 +200,7 @@ function Index() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
-              Innovation Norway · Houston
+              Houston
             </p>
             <h1 className="font-display text-2xl font-semibold leading-none text-foreground">
               Houston Venues
@@ -364,7 +364,7 @@ function Index() {
       </main>
 
       <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        Houston Venues · Internal planning tool for Innovation Norway Houston
+        Houston Venues · Internal planning tool
       </footer>
 
       <VenueDetail
