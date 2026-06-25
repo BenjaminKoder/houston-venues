@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -93,6 +94,11 @@ export function VenueForm({
           <DialogTitle className="font-display text-xl">
             {isNew ? "Add venue" : `Edit ${venue?.name}`}
           </DialogTitle>
+          <DialogDescription>
+            {isNew
+              ? "Add a new venue to the library."
+              : "Update venue details and save your changes."}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6 py-2">

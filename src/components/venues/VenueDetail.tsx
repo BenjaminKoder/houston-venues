@@ -5,7 +5,12 @@ import {
   Sparkles,
   Trash2,
 } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { VenueImage } from "./VenueImage";
 import { RatingPill, VerifiedBadge } from "./Badges";
@@ -64,6 +69,11 @@ export function VenueDetail({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[92vh] gap-0 overflow-y-auto p-0 sm:max-w-2xl">
+        <DialogTitle className="sr-only">{venue.name}</DialogTitle>
+        <DialogDescription className="sr-only">
+          Details for {venue.name}
+          {venue.neighborhood ? ` in ${venue.neighborhood}` : ""}.
+        </DialogDescription>
         <div className="relative aspect-[16/9] w-full overflow-hidden">
           <VenueImage
             venue={venue}
