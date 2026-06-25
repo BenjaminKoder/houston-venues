@@ -84,6 +84,31 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Require a valid Supabase JWT before invoking the paid AI gateway, to
+    // prevent anonymous internet callers from draining AI credits.
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized." }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY");
+    if (supabaseUrl && supabaseAnonKey) {
+      const authClient = createClient(supabaseUrl, supabaseAnonKey, {
+        global: { headers: { Authorization: authHeader } },
+        auth: { persistSession: false, autoRefreshToken: false },
+      });
+      const { data: claims, error: claimsError } = await authClient.auth.getClaims();
+      if (claimsError || !claims) {
+        return new Response(
+          JSON.stringify({ error: "Unauthorized." }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       return new Response(
