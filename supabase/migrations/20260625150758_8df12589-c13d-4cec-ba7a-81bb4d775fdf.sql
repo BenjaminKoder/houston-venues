@@ -1,0 +1,4 @@
+UPDATE public.venues SET image_url = 'https://i0.wp.com/hermannpark.org/wp-content/uploads/2025/01/74307335007-a-38-i-9843-1200x0-2.png?fit=1200%2C800&quality=80&ssl=1', image_verified = true WHERE id = 'lott-hall';
+UPDATE public.venues SET image_url = 'https://the3stories.com/wp-content/uploads/2023/10/the3stories-image-1.jpg', image_verified = true WHERE id = '3-stories';
+UPDATE public.venues SET image_url = 'https://lirp.cdn-website.com/4f3518ef/dms3rep/multi/opt/thecannon-wh-homepage-1920w.jpg', image_verified = true WHERE id = 'the-cannon';
+UPDATE public.venues SET image_url = 'https://buffalobayou.org/wp-content/uploads/2023/03/freedom-over-texas-eleanor-tinsley-park-rental.jpg', image_verified = true WHERE id = 'buffalo-bayou-water-works';
