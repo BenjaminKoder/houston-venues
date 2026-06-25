@@ -46,10 +46,12 @@ function isSafeUrl(raw: string): boolean {
 }
 
 async function fetchOgImage(url: string): Promise<string | null> {
+  if (!isSafeUrl(url)) return null;
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0 (compatible; HoustonVenues/1.0)" },
       signal: AbortSignal.timeout(8000),
+      redirect: "manual",
     });
     if (!res.ok) return null;
     const html = await res.text();
