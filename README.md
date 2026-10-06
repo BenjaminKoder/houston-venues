@@ -16,7 +16,7 @@ Oversikt over potensielle lokaler og leverandører til delegasjonsbesøk og arra
 
 ## Teknologi
 
-React, TypeScript, TanStack Start, Tailwind CSS og Supabase (Postgres med Row Level Security, Edge Functions). Bygget med Lovable.
+React, TypeScript, TanStack Start, Tailwind CSS og Supabase (Postgres med Row Level Security, Edge Functions).
 
 ## Kjør lokalt
 
