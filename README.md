@@ -1,26 +1,26 @@
-# Pixel Perfect
+# Houston Venues
 
-Implement exactly the screenshot and nothing else
+Oversikt over potensielle lokaler og leverandører til delegasjonsbesøk og arrangementer for Innovasjon Norges kontor i Houston.
 
-This project was built with [Lovable](https://lovable.dev).
+**Live:** [houston-venues.lovable.app](https://houston-venues.lovable.app)
 
-**Live app**: https://houston-venues.lovable.app
+<img src="docs/skjermbilde.jpg" alt="Skjermbilde av Houston Venues" width="800">
 
-## Build with Lovable
+## Funksjoner
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/0c2aed06-33b2-4bd3-af93-a977e349ff93).
+- Lokaler som kort, på kart (Leaflet og OpenStreetMap) eller begge side om side
+- Filtrering på kategori og bydel, og søk på navn
+- Import av lokaler fra CSV og Excel
+- AI-utfylling: en Supabase Edge Function (`enrich-venue`) fyller ut manglende informasjon om et lokale
+- Egen oversikt over leverandører
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## Teknologi
 
-## Development
+React, TypeScript, TanStack Start, Tailwind CSS og Supabase (Postgres med Row Level Security, Edge Functions). Bygget med Lovable.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Kjør lokalt
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+npm install
 npm run dev
 ```
