@@ -2,7 +2,7 @@
 
 Oversikt over potensielle lokaler og leverandører til delegasjonsbesøk og arrangementer for Innovasjon Norges kontor i Houston.
 
-**Live:** [houston-venues.lovable.app](https://houston-venues.lovable.app)
+**Live:** [houston-venues.vercel.app](https://houston-venues.vercel.app)
 
 <img src="docs/skjermbilde.jpg" alt="Skjermbilde av Houston Venues" width="800">
 
